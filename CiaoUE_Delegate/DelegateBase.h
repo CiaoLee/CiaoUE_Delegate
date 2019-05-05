@@ -50,6 +50,17 @@ public:
 
 	}
 
+protected:
+
+	/** 
+	*	Gets the delegate instance. Not intended for use by user code.
+	*/
+
+	inline IDelegateInstance*  GetDelegateInstanceProtected() const
+	{
+		return DelegateSize ? (IDelegateInstance*)DelegateAllocator.GetAllocatedSize() : nullptr;
+	}
+
 private:
 	//Allocator to allocate delegate instance.
 	FDelegateAllocatorType::ForElementType<FAlignedInlineDelegateType> DelegateAllocator;
