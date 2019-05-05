@@ -58,7 +58,7 @@ IMPLEMENT_ALIGNED_STORAGE(8);
 IMPLEMENT_ALIGNED_STORAGE(4);
 IMPLEMENT_ALIGNED_STORAGE(2);
 
-//Undefine IMPLEMENT_ALIGNED_STORAGE.
+//undefine IMPLEMENT_ALIGNED_STORAGE 
 #undef  IMPLEMENT_ALIGNED_STORAGE	
 
 //An untyped array of data with compile-time alignment and size derived from another type.

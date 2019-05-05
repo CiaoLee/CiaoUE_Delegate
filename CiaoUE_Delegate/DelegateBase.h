@@ -47,7 +47,23 @@ public:
 
 	inline void Unbind()
 	{
+		if (IDelegateInstance* Ptr = GetDelegateInstanceProtected())
+		{
+			Ptr->~~IDelegateInstance();
+			DelegateAllocator.ResizeAllocation(0, 0, sizeof(FAlignedInlineDelegateType));
+			DelegateSize = 0;
+		}
+	}
 
+	inline FDelegateHandle GetHandle() const
+	{
+		FDelegateHandle Result;
+		if (IDelegateInstance* Ptr = GetDelegateInstanceProtected())
+		{
+			Result = Ptr->GetHandle();
+		}
+
+		return Result;
 	}
 
 protected:
@@ -62,6 +78,21 @@ protected:
 	}
 
 private:
+
+	friend void* operator new(size_t Size, FDelegateBase& Base);
+
+	void* Allocate(int Size)
+	{
+		if (IDelegateInstance* CurrentInstance = GetDelegateInstanceProtected())
+		{
+
+		}
+
+		int SizeOfDelegate = (int)sizeof(FAlignedInlineDelegateType);
+
+
+	}
+
 	//Allocator to allocate delegate instance.
 	FDelegateAllocatorType::ForElementType<FAlignedInlineDelegateType> DelegateAllocator;
 	
