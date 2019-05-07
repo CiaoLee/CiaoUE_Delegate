@@ -1,6 +1,7 @@
 #pragma once
 
 #include <tuple>
+#include "TemplateHelper.h"
 #include "IDelegateInstance.h"
 #include "DelegateInstanceInterface.h"
 
@@ -12,7 +13,7 @@ template<bool bConst,class UserClass,typename FuncType,typename... VarTypes>
 class TBaseRawMethodDelegateInstance;
 
 template<bool bConst,class UserClass,typename WrappedRetValType, typename... ParamTypes, typename... VarTypes>
-class TBaseRawMethodDelegateInstance<bConst, UserClass, WrappedRetValType(ParamTypes...), VarTypes...> : public IBaseDelegateInstance<typename TUnwrapType<WrappedRetValType>::Type (ParamTypes..)>
+class TBaseRawMethodDelegateInstance<bConst, UserClass, WrappedRetValType(ParamTypes...), VarTypes...> : public IBaseDelegateInstance<typename TUnwrapType<WrappedRetValType>::Type (ParamTypes...)>
 {
 public:
 
@@ -26,7 +27,7 @@ private:
 
 public:
 	//Typedef the function return 
-	typedef typename TMemFunPtrType<bConst, UserClass, RetValType(ParamTypes..., VarTypes...)>::Type FMethodPtr;
+	typedef typename TMemFunPtrType<bConst, UserClass, RetValType(ParamTypes... , VarTypes...)>::Type FMethodPtr;
 
 	//Create and initilaize a new instance;
 	TBaseRawMethodDelegateInstance(UserClass* InUserObject, FMethodPtr InMethodPtr, VarTypes... Vars)
@@ -54,7 +55,7 @@ protected:
 	FMethodPtr MethodPtr;
 
 	//Payload member variables(if any).
-	std::tuple<VarTypes....> Payload;
+	std::tuple<VarTypes...> Payload;
 
 	//The handle of this delegate
 	FDelegateHandle Handle;
