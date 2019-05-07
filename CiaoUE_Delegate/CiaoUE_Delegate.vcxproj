@@ -115,11 +115,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="DelegateSignatureImpl.h" />
     <ClInclude Include="HeapAllocator.h" />
     <ClInclude Include="DelegateBase.h" />
     <ClInclude Include="DelegateInstanceInterface.h" />
     <ClInclude Include="DelegateInstancesImpl.h" />
     <ClInclude Include="IDelegateInstance.h" />
+    <ClInclude Include="TemplateHelper.h" />
     <ClInclude Include="TypeCompatibleBytes.h" />
   </ItemGroup>
   <ItemGroup>

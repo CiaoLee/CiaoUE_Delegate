@@ -54,19 +54,19 @@ struct TMemFunPtrType<false, Class, RetType(ArgTypes...)>
 template <typename FuncType>
 struct TPayload;
 
-template <typename RetType, typename... ArgTypes>
-struct TPayload<RetType(ArgTypes...)>
+template <typename RetType, typename... Types>
+struct TPayload<RetType(Types...)>
 {
-	std::tuple<ArgTypes..., RetType> Values;
+	std::tuple<Types..., RetType> Values;
 
 	template<typename... ArgTypes>
 	explicit TPayload(ArgTypes&&...Args) : Values(Forward<ArgTypes>(Args)...)
 	{
 
 	}
-	void GetResult()
+	RetType& GetResult()
 	{
-
+		return std::get<sizeof...(Types)>();
 	}
 };
 

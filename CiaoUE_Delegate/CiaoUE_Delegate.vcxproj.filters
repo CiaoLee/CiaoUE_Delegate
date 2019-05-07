@@ -33,6 +33,12 @@
     <ClInclude Include="IDelegateInstance.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="TemplateHelper.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DelegateSignatureImpl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DelegateHandle.cpp">

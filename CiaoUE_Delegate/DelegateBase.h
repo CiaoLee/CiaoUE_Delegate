@@ -83,14 +83,24 @@ private:
 
 	void* Allocate(int Size)
 	{
+
 		if (IDelegateInstance* CurrentInstance = GetDelegateInstanceProtected())
 		{
-
+			CurrentInstance->~IDelegateInstance();
 		}
 
 		int SizeOfDelegate = (int)sizeof(FAlignedInlineDelegateType);
+		//Try get new delegate size.
+		//divide and round up to get delegate size.
+		int NewDelegateSize = (Size + SizeOfDelegate - 1) / SizeOfDelegate;
 
+		if (NewDelegateSize != DelegateSize)
+		{
+			DelegateSize.ResizeAllocation(0, NewDelegateSize, sizeof(FAlignedInlineDelegateType));
+			DelegateSize = NewDelegateSize;
+		}
 
+		return DelegateAllocator.GetAllocation();
 	}
 
 	//Allocator to allocate delegate instance.
@@ -99,3 +109,8 @@ private:
 	//The delegate size.
 	int DelegateSize;
 };
+
+inline void* operator new(size_t Size, FDelegateBase& Base)
+{
+	return Base.Allocate(Size);
+}
