@@ -45,6 +45,24 @@ public:
 		return UserObject == InUserObject;
 	}
 
+	virtual bool IsSafeToExecute() const override final
+	{
+		//We never know whether or not it is safe to deference a C++ pointer,
+		//But we have to trust the user in this case. Prefer using a shared-pointer
+		//based delegate type instead.
+		return true;
+	}
+public:
+
+	virtual void CreateCopy(FDelegateBase& Base) override final
+	{
+		new (Base) UnwrappedThisType(*(UnwrappedThisType*)this);
+	}
+
+	virtual RetValType Execute(ParamTypes... Params) const override final
+	{
+
+	}
 
 protected:
 
