@@ -74,7 +74,7 @@ protected:
 
 	inline IDelegateInstance*  GetDelegateInstanceProtected() const
 	{
-		return DelegateSize ? (IDelegateInstance*)DelegateAllocator.GetAllocatedSize() : nullptr;
+		return DelegateSize ? (IDelegateInstance*)DelegateAllocator.GetAllocation() : nullptr;
 	}
 
 private:
@@ -96,7 +96,7 @@ private:
 
 		if (NewDelegateSize != DelegateSize)
 		{
-			DelegateSize.ResizeAllocation(0, NewDelegateSize, sizeof(FAlignedInlineDelegateType));
+			DelegateAllocator.ResizeAllocation(0, NewDelegateSize, sizeof(FAlignedInlineDelegateType));
 			DelegateSize = NewDelegateSize;
 		}
 

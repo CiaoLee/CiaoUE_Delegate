@@ -39,6 +39,9 @@
     <ClInclude Include="DelegateSignatureImpl.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="TupleUtility.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DelegateHandle.cpp">
